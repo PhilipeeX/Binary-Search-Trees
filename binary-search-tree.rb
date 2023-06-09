@@ -20,6 +20,8 @@ module Comparable
 end
 
 class Tree
+    attr_reader :root
+
     def initialize(array)
         @array = array
         @root = build_tree
@@ -41,7 +43,3 @@ class Tree
         @array.uniq
     end
 end
-
-tree1 = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
-
-tree1
