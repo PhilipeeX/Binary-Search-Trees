@@ -10,12 +10,20 @@ require 'pry-byebug'
 # and turns it into a balanced binary tree full of Node objects appropriately placed
 # (don’t forget to sort and remove duplicates!). The #build_tree method should return the level-0 root node.
 
-# Cria um node recebendo seu valor e armazenando em @data
+# Cria um node recebendo seu valor e armazena-o em @data
 class Node
-  attr_reader :data
+  attr_accessor :data, :left, :right
 
   def initialize(value)
     @data = value
+  end
+
+  def define_left(treeleft)
+    @left = treeleft
+  end
+
+  def define_right(treeright)
+    @right = treeright
   end
 end
 
@@ -36,18 +44,21 @@ class Tree
 
   def initialize(array)
     @array = array
-    @root = build_tree
+    # @root = build_tree(sort_array, sort_array[0], sort_array[-1])
   end
 
-  def build_tree
-    @array = sort_array
-    i = 0
-    while i < @array.length
-      @array[i] = Node.new(@array[i])
-      i += 1
-    end
+  def build_tree(sort_array, sort_array[0], sort_array[-1])
 
-    @array[@array.length / 2]
+    return nil if array_start > array_end
+
+    mid = (array_start + array_end) / 2
+
+    root = Tree.new(array[mid])
+
+    root.define_left(build_tree(array, array_start, array[mid - 1]))
+    root.define_right(build_tree(array, array[mid + 1], array_end))
+
+    root
   end
 
   # Sort and remove duplicates!
