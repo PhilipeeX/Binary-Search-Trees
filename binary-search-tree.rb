@@ -40,30 +40,24 @@ end
 
 # Cria uma arvore identada
 class Tree
-  attr_reader :root
+  attr_accessor :root, :data
 
   def initialize(array)
-    @array = array
-    # @root = build_tree(sort_array, sort_array[0], sort_array[-1])
+    binding.pry
+    @data = array.sort.uniq
+    @root = build_tree(data)
   end
 
-  def build_tree(sort_array, sort_array[0], sort_array[-1])
+  def build_tree(array)
+    return nil if array.empty?
 
-    return nil if array_start > array_end
-
-    mid = (array_start + array_end) / 2
+    mid = (array.size - 1) / 2
 
     root = Tree.new(array[mid])
 
-    root.define_left(build_tree(array, array_start, array[mid - 1]))
-    root.define_right(build_tree(array, array[mid + 1], array_end))
+    root.define_left(build_tree(array[0...mid]))
+    root.define_right(build_tree(array[(mid + 1)..]))
 
     root
-  end
-
-  # Sort and remove duplicates!
-  def sort_array
-    @array = @array.sort
-    @array.uniq
   end
 end
